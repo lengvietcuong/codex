@@ -1,4 +1,5 @@
 from __future__ import annotations
+import logging
 import os
 
 import gradio as gr
@@ -22,6 +23,11 @@ supabase_client = supabase.Client(
 dependencies = Dependencies(
     supabase_client=supabase_client, fireworks_client=fireworks_client
 )
+
+# Set up logging with HTTP requests to avoid clutter
+logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
+logging.getLogger("httpx").disabled = True
+logger = logging.getLogger(__name__)
 
 
 # Async generator to stream responses from the agent

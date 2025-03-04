@@ -2,7 +2,6 @@ import asyncio
 import json
 import logging
 import os
-import subprocess
 from datetime import datetime, timezone
 from itertools import cycle
 from time import perf_counter
@@ -16,10 +15,9 @@ from groq import AsyncGroq
 from openai import AsyncOpenAI
 from tqdm.asyncio import tqdm_asyncio
 
+from html_processing import get_html, get_page_text
 
-# Set up logging with HTTP requests to avoid clutter
-logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
-logging.getLogger("httpx").disabled = True
+
 logger = logging.getLogger(__name__)
 
 
@@ -207,42 +205,6 @@ async def ingest_chunk(
         )
         return False
     return True
-
-
-async def get_html(aiohttp_session: aiohttp.ClientSession, url: str) -> str:
-    """
-    Fetch the raw HTML content of a web page.
-
-    Args:
-        aiohttp_session (aiohttp.ClientSession): A shared aiohttp session.
-        url (str): The URL of the web page.
-
-    Returns:
-        str: The raw HTML content of the web page.
-    """
-    async with aiohttp_session.get(url, timeout=TIMEOUT_SECONDS) as response:
-        return await response.text()
-
-
-def get_page_text(html_content: str) -> str:
-    """
-    Convert a web page's HTML content to Markdown format.
-
-    Args:
-        html_content (str): The HTML content to convert.
-
-    Returns:
-        str: The Markdown content converted from HTML.
-    """
-    process = subprocess.Popen(
-        ["html2markdown"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    markdown_text, _ = process.communicate(html_content)
-    return markdown_text
 
 
 async def scrape_url_and_ingest(
