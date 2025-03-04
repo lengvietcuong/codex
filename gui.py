@@ -2,27 +2,19 @@ from __future__ import annotations
 import logging
 import os
 
-import gradio as gr
-import supabase
 from dotenv import load_dotenv
-from openai import AsyncOpenAI
+import gradio as gr
 from pydantic_ai.messages import ModelRequest, UserPromptPart
+import supabase
 
 from agent import codex_agent, Dependencies
 
 
-FIREWORKS_AI_BASE_URL = "https://api.fireworks.ai/inference/v1"
-# Load environment variables and create clients
 load_dotenv()
-fireworks_client = AsyncOpenAI(
-    api_key=os.getenv("FIREWORKS_API_KEY"), base_url=FIREWORKS_AI_BASE_URL
-)
 supabase_client = supabase.Client(
     os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_SERVICE_KEY")
 )
-dependencies = Dependencies(
-    supabase_client=supabase_client, fireworks_client=fireworks_client
-)
+dependencies = Dependencies(supabase_client=supabase_client)
 
 # Set up logging with HTTP requests to avoid clutter
 logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
@@ -74,7 +66,7 @@ async def user_interaction(user_prompt, chat_history, api_history):
 with gr.Blocks() as demo:
     gr.Markdown("# Codex")
     gr.Markdown(
-        "Ask me anything about your favorite library, framework, or API. I currently know the documentation of Groq's API, Fireworks AI, and Unsloth."
+        "Ask me anything about your favorite library, framework, or API. I currently know the documentation of Groq's API, Fireworks AI, and Unsloth. I'm also able to search in Stack Overflow."
     )
 
     chatbot = gr.Chatbot(type="messages")
