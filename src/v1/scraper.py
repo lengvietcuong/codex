@@ -15,7 +15,7 @@ from groq import AsyncGroq
 from openai import AsyncOpenAI
 from tqdm.asyncio import tqdm_asyncio
 
-from html_processing import get_html, get_page_text
+from v1.html_processing import get_html, get_page_text
 
 
 logger = logging.getLogger(__name__)

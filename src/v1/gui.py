@@ -7,7 +7,7 @@ import gradio as gr
 from pydantic_ai.messages import ModelRequest, UserPromptPart
 import supabase
 
-from agent import codex_agent, Dependencies
+from v1.agent import codex_agent, Dependencies
 
 
 load_dotenv()

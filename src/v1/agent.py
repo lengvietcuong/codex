@@ -23,7 +23,7 @@ class Dependencies:
 
 
 load_dotenv()
-model = MistralModel("mistral-large-latest", api_key=os.getenv("MISTRAL_API_KEY_1"))
+model = MistralModel("mistral-large-latest", api_key=os.getenv("MISTRAL_API_KEY"))
 codex_agent = Agent(
     model,
     system_prompt=SYSTEM_PROMPT,
