@@ -1,0 +1,11 @@
+langchain
+langchain-core
+langchain-fireworks
+requests
+python-dotenv>=1.0.0
+tqdm
+jsonlines==4.0.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+PyGithub>=2.1.1
+langchain-google-genai>=0.0.4
