@@ -9,7 +9,7 @@ from google import genai as gemini
 import supabase
 
 from documentation import (
-    get_documentation_urls as _get_documentation_urls,
+    get_documentation_pages as _get_documentation_pages,
     get_documentation as _get_documentation,
 )
 from stackoverflow import search_stackoverflow as _search_stackoverflow
@@ -52,23 +52,23 @@ async def scrape(
         url: Base URL to scrape documentation from
 
     Returns:
-        JSON with count of URLs found and successfully scraped
+        JSON with count of pages found and successfully scraped
     """
     return await _scrape(str(url), firecrawl_client, gemini_client, supabase_client)
 
 
-@app.get("/documentation-urls", response_model=list[str])
-async def get_documentation_urls(must_include: list[str] = Query(None)):
+@app.get("/documentation-pages", response_model=list[dict[str, str]])
+async def get_documentation_pages(must_include: list[str] = Query(None)):
     """
-    Get all documentation URLs, optionally filtered by terms that must be included in the URL.
+    Get all documentation pages, optionally filtered by terms that must be included in the URL.
 
     Args:
-        must_include: Optional list of strings that must be present in the URLs
+        must_include: Optional list of strings that must be present in the pages
 
     Returns:
-        List of documentation URLs
+        List of documentation pages where each page is a dictionary with keys "url", "title", and "summary"
     """
-    return await _get_documentation_urls(supabase_client, must_include)
+    return await _get_documentation_pages(supabase_client, must_include)
 
 
 @app.get("/documentation", response_model=str)

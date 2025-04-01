@@ -5,34 +5,55 @@ import supabase
 logger = logging.getLogger(__name__)
 
 
-async def get_documentation_urls(
+async def get_documentation_pages(
     supabase_client: supabase.AsyncClient, must_include: list[str] | None = None
-) -> list[str]:
+) -> list[dict]:
     """
-    Retrieve a list of documentation URLs from the database.
+    Retrieve a list of documentation pages with their URLs, titles, and summaries from the database.
 
     Args:
         supabase_client (supabase.AsyncClient): The Supabase client instance.
-        must_include (list[str] | None): Optional list of substrings. If provided, only URLs containing at least one of these substrings will be returned. Defaults to None.
+        must_include (list[str] | None): Optional list of substrings. If provided, only pages containing at least one of these substrings in their URL will be returned. Defaults to None.
 
     Returns:
-        list[str]: A list of documentation URLs.
+        list[dict]: A list of documentation pages with their URLs, titles, and summaries.
     """
-    logger.info("Listing documentation pages")
-    result = await supabase_client.from_("documentation").select("url").execute()
-    urls = sorted({document["url"] for document in result.data})
-    if not must_include:
-        return urls
+    logger.info("Listing documentation pages with titles and summaries")
 
-    # Filter URLs if must_include is provided
-    logger.info(f"Filtering URLs for keywords: {must_include}")
-    filtered_urls = []
-    for url in urls:
+    # Select URLs, titles, and summaries and sort by chunk index
+    result = (
+        await supabase_client.from_("documentation")
+        .select("url, title, summary, chunk_index")
+        .order("chunk_index")
+        .execute()
+    )
+
+    # Ensure unique URLs and check for required keywords
+    pages = []
+    urls_seen = set()
+    for page in result.data:
+        url = page["url"]
+
+        if url in urls_seen:
+            continue
         url_lower = url.lower()
-        if any(keyword.lower() in url_lower for keyword in must_include):
-            filtered_urls.append(url)
-    logger.info(f"Found {len(filtered_urls)} documentation pages")
-    return filtered_urls
+        if must_include and not any(
+            keyword.lower() in url_lower for keyword in must_include
+        ):
+            continue
+
+        pages.append(
+            {
+                "url": url,
+                "title": page["title"],
+                "summary": page["summary"],
+            }
+        )
+        urls_seen.add(url)
+
+    logger.info(f"Found {len(pages)} documentation pages")
+    pages.sort(key=lambda x: x["url"])
+    return pages
 
 
 async def get_documentation(url: str, supabase_client: supabase.AsyncClient) -> str:
