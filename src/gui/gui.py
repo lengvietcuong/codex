@@ -7,12 +7,12 @@ import gradio as gr
 from pydantic_ai.messages import ModelRequest, UserPromptPart
 import supabase
 
-from v1.agent import codex_agent, Dependencies
+from agent import codex_agent, Dependencies
 
 
 load_dotenv()
 supabase_client = supabase.Client(
-    os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_SERVICE_KEY")
+    os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY")
 )
 dependencies = Dependencies(supabase_client=supabase_client)
 

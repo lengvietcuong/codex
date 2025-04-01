@@ -15,7 +15,7 @@ from groq import AsyncGroq
 from openai import AsyncOpenAI
 from tqdm.asyncio import tqdm_asyncio
 
-from v1.html_processing import get_html, get_page_text
+from html_processing import get_html, get_page_text
 
 
 logger = logging.getLogger(__name__)
@@ -335,7 +335,7 @@ async def main():
         api_key=os.getenv("FIREWORKS_API_KEY"), base_url=FIREWORKS_AI_BASE_URL
     )
     supabase_client = await supabase.acreate_client(
-        os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_SERVICE_KEY")
+        os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY")
     )
     firecrawl_client = FirecrawlApp(api_key=os.getenv("FIRECRAWL_API_KEY"))
 
