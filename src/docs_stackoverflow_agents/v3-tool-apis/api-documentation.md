@@ -55,21 +55,28 @@ This will start the FastAPI application on `http://0.0.0.0:8000`.
 curl -X POST "http://localhost:8000/scrape?url=https://docs.pydantic.dev/latest/"
 ```
 
-### Get Documentation URLs
+### Get Documentation Pages
 
-**URL:** `/documentation-urls`  
+**URL:** `/documentation-pages`  
 **Method:** `GET`  
-**Description:** Retrieves a list of all documentation URLs stored in the database, with optional filtering.
+**Description:** Retrieves a list of all documentation pages (URLs, titles, and summaries) stored in the database, with optional filtering.
 
 **Parameters:**
-- `must_include` (optional): List of strings that must be present in the URLs
+- `must_include` (optional): List of strings that must be present in the URLs. If provided, only URLs containing at least one of these strings will be returned.
 
 **Response:**
 ```json
 [
-  "https://docs.example.com/getting-started",
-  "https://docs.example.com/api-reference",
-  "https://docs.example.com/tutorials/basic"
+  {
+    "url": "https://docs.pydantic.dev/latest/",
+    "title": "Pydantic Documentation",
+    "summary": "Data validation and settings management using Python type hints"
+  },
+  {
+    "url": "https://docs.supabase.com/",
+    "title": "Supabase Documentation",
+    "summary": "The open source Firebase alternative"
+  }
 ]
 ```
 
