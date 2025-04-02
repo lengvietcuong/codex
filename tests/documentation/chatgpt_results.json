@@ -1,0 +1,61 @@
+[
+    {
+        "question": "When using Groq's API to access DeepSeek R1, how can I see the reasoning content?",
+        "base_answer": "Set the 'reasoning_format' parameter to either 'parsed' or 'raw' in the API request.",
+        "model_answer": "To access the reasoning content when using Groq's API with the DeepSeek R1 model, set the max_tokens parameter to 1 in your API request. This configuration returns only the reasoning_content field, which contains the model's thought process.\n\nExample:\n\nimport os\nfrom groq import Groq\n\nclient = Groq(api_key=os.environ.get(\"GROQ_API_KEY\"))\n\nresponse = client.chat.completions.create(\n    model=\"deepseek-r1-distill-llama-70b\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Who are the founders of OpenAI?\"}\n    ],\n    max_tokens=1\n)\n\nreasoning_content = response.choices[0].message.reasoning_content\nprint(reasoning_content)\n\nThis approach allows you to extract the model's reasoning without generating the full response.",
+        "verdict": "failed"
+    },
+    {
+        "question": "If I want to use Groq with OpenAI's client libraries, what should I set the base URL to?",
+        "base_answer": "https://api.groq.com/openai/v1",
+        "model_answer": "To integrate Groq with OpenAI's client libraries, set the base_url to https://api.groq.com/openai/v1.\\n\\nThis configuration directs your requests to Groq's API endpoint.\\n\\nCONSOLE.GROQ.COM\\n\\nPython Example:\\n\\nimport os\\nimport openai\\n\\nclient = openai.OpenAI(\\n    base_url=\"https://api.groq.com/openai/v1\",\\n    api_key=os.environ.get(\"GROQ_API_KEY\")\\n)\\n\\nJavaScript Example:\\n\\nimport { Configuration, OpenAIApi } from \"openai\";\\n\\nconst configuration = new Configuration({\\n  basePath: \"https://api.groq.com/openai/v1\",\\n  apiKey: process.env.GROQ_API_KEY,\\n});\\n\\nconst openai = new OpenAIApi(configuration);\\n\\nEnsure you replace process.env.GROQ_API_KEY with your actual Groq API key or set it appropriately in your environment variables.\\n\\nThis setup allows your application to utilize Groq's inference capabilities through OpenAI's client libraries.",
+        "verdict": "passed"
+    },
+    {
+        "question": "How can I use Groq's API to list all the currently supported models?",
+        "correct_answer": "Use the https://api.groq.com/openai/v1/models endpoint.",
+        "model_answer": "To retrieve a list of currently supported models via Groq's API, you can refer to the \"Models\" section in the GroqCloud Developer Console. This section provides detailed information about the available models and is regularly updated as new models are added.\n\nAs of now, Groq supports the following models:\n\nDeepseek R1 Distill Llama 70B: A distilled version of the Llama 70B model optimized for performance.\n\nLlama Series:\n- Llama 3.3\n- Llama 3.2\n- Llama 3.1\n- LlamaGuard\n\nThese models are part of the Llama series, each offering different capabilities and optimizations.\n\nWhisper Series:\n- Whisper Large v3\n- Whisper Turbo\n- Whisper Distill\n\nThese models are designed for tasks like audio transcription and translation.\n\nMixtral 8x7b: A model tailored for specific applications requiring unique configurations.\n\nGemma 2: Another specialized model offered by Groq for particular use cases.\n\nFor the most accurate and up-to-date information, it's recommended to consult the GroqCloud Developer Console directly.\n\nAdditionally, Groq's API is designed to be compatible with OpenAI's client libraries, making it straightforward to integrate these models into your existing applications. You can configure your application to use Groq's API by adjusting the base_url and providing your Groq API key.\n\nFor more detailed information on each model and their specific capabilities, please refer to the GroqCloud Developer Console.",
+        "verdict": "failed"
+    },
+    {
+        "question": "Does Groq support fine-tuning?",
+        "base_answer": "Yes, Groq supports fine-tuning of AI models.\n\nAccording to Groq's Terms of Use, users can supply their own training data to fine-tune or customize generative AI models to meet specific needs. Groq ensures that user data, including prompts, training data, and generated outputs, are owned by the user and are not retained or used by Groq beyond performing the requested services.\n\nGROQ.COM\n\nAdditionally, Groq offers fine-tuned models specifically designed for tool use, such as llama3-groq-70b-8192-tool-use-preview and llama3-groq-8b-8192-tool-use-preview. These models are currently in public preview and are optimized for integrating external functions and tools.\n\nCONSOLE.GROQ.COM\n\nFor developers interested in creating custom datasets for fine-tuning, the groq-qa-generator is a CLI tool and Python library that facilitates the generation of question-answer pairs from text. It also supports exporting these pairs in JSON format and uploading them directly to Hugging Face, streamlining the fine-tuning process of large language models.\n\nGITHUB.COM\n\nIn a discussion on Hugging Face, a user inquired about fine-tuning the Llama-3-Groq-8B-Tool-Use model for Vietnamese language support. A Groq representative suggested that while the base model focuses on English, fine-tuning with Vietnamese function-calling examples could potentially enhance its performance for Vietnamese prompts.\n\nHUGGINGFACE.CO\n\nIn summary, Groq provides robust support for fine-tuning AI models, offering both the necessary tools and infrastructure to customize models according to specific requirements.",
+        "verdict": "failed"
+    },
+    {
+        "question": "What libraries does Groq have for different programming languages?",
+        "base_answer": "Python, JavaScript, C#, Dart/Flutter, PHP, Ruby",
+        "model_answer": "Groq offers support for multiple programming languages through various tools and libraries:\n\nC++ and Python: The Magnolia compiler, integral to Groq's hardware specialization, is implemented using both Magnolia and C++.\nMER.VIN\n\n.NET (C#): The Groq .NET SDK provides a fully generated C# client based on Groq's OpenAPI specification, supporting modern .NET features and compatibility with .NET Framework and .NET Standard 2.0.\nTRYAGI.GITHUB.IO\n\nAutoGroq Compiler: AutoGroq supports various programming languages commonly used in high-performance computing, including C, C++, and Python.\nTHEGLOBALPRESENCE.COM\n\nThese tools enable developers to effectively utilize Groq's hardware and software capabilities across different programming environments.",
+        "verdict": "failed"
+    },
+    {
+        "question": "What is the pricing for Fireworks AI's latest fine-tuning service?",
+        "base_answer": "Free",
+        "model_answer": "Fireworks AI's fine-tuning service is currently free. DOCS.FIREWORKS.AI\nOnce pricing is implemented, it will be based on the total number of tokens processed during training (dataset size multiplied by the number of epochs). Serving fine-tuned models will not incur additional costs beyond the standard inference fees.\nPREVIEW.FIREWORKS.AI",
+        "verdict": "passed"
+    },
+    {
+        "question": "Does Fireworks AI support serverless deployment for a LoRA fine-tuned Llama 3.3 70B?",
+        "base_answer": "No",
+        "model_answer": "Yes, Fireworks AI supports serverless deployment for LoRA fine-tuned Llama 3.3 70B models. You can fine-tune the Llama 3.3 70B Instruct model using Fireworks' LoRA-based service and deploy it on their serverless infrastructure. This allows you to serve up to 100 fine-tuned models without additional costs beyond the base model's inference pricing.",
+        "verdict": "failed"
+    },
+    {
+        "question": "In Fireworks AI, which models can be fine-tuned using LoRA and deployed as serverless?",
+        "base_answer": "llama-v3p1-8b-instruct, llama-v3p1-70b-instruct, llama-v3p2-3b-instruct",
+        "model_answer": "In Fireworks AI, you can fine-tune most models using LoRA (Low-Rank Adaptation) and deploy them in a serverless environment. However, it's important to note that fine-tuned model inference on serverless deployments may exhibit slower performance compared to base models. For applications requiring low latency, on-demand deployments are recommended, as they offer inference speeds closer to those of base models. Additionally, merging fine-tuned weights into the base model when using on-demand deployments can provide performance identical to base model inference.",
+        "verdict": "failed"
+    },
+    {
+        "question": "How to create a fine-tuning job from the terminal in the latest version of Fireworks AI?",
+        "base_answer": "firectl create sftj --base-model <MODEL_ID> --dataset <dataset_name> --output-model <desired_model_id>",
+        "model_answer": "To create a fine-tuning job from the terminal using the latest version of Fireworks AI, follow these steps:\n\nInstall firectl:\n firectl is the command-line utility for managing resources on the Fireworks AI Platform. Install it by following the instructions in the Firectl Getting Started Guide.\n\nPrepare Your Dataset:\n Create a JSONL file where each line is a JSON object representing a training example. Each object should have a messages array containing message objects with role (system, user, or assistant) and content fields. Ensure the dataset has at least 3 examples and no more than 3,000,000.\n\nExample:\n\n{\"messages\": [{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}, {\"role\": \"user\", \"content\": \"What color is the sky?\"}, {\"role\": \"assistant\", \"content\": \"blue\"}]}\n{\"messages\": [{\"role\": \"user\", \"content\": \"What is 1+1?\"}, {\"role\": \"assistant\", \"content\": \"2\"}, {\"role\": \"user\", \"content\": \"Now what is 2+2?\"}, {\"role\": \"assistant\", \"content\": \"4\"}]}\n\nUpload the Dataset:\n Use firectl to upload your dataset:\n\nfirectl create dataset <DATASET_ID> path/to/dataset.jsonl\n Replace <DATASET_ID> with your chosen dataset identifier.\n\nVerify the upload:\n\nfirectl get dataset <DATASET_ID>\n\nCreate the Fine-Tuning Job:\n Initiate the fine-tuning process:\n\nfirectl create fine-tuning-job --dataset <DATASET_ID> --base-model <BASE_MODEL> --epochs <EPOCHS>\n Replace <BASE_MODEL> with the model you wish to fine-tune (e.g., llama-v3p1-8b-instruct) and <EPOCHS> with the desired number of training epochs.\n\nMonitor the Job:\n Check the status of your fine-tuning job:\n\nfirectl get fine-tuning-job <FINE_TUNING_JOB_ID>\n Replace <FINE_TUNING_JOB_ID> with the ID of your fine-tuning job.\n\nFor more detailed information, refer to the Fireworks AI fine-tuning documentation.",
+        "verdict": "failed"
+    },
+    {
+        "question": "How do I monitor my training progress when using Firework AI's fine-tuning service?",
+        "base_answer": "Connect your fine-tuning job with Weigth & Biases using the flags '--wandb-entity my-org', '--wandb-api-key xxx', and '--wandb-project 'My Project'.",
+        "model_answer": "To monitor your training progress using Fireworks AI's fine-tuning service, you can utilize their 'Firectl' command-line interface (CLI). This tool provides real-time updates on your fine-tuning jobs, including metrics such as loss and accuracy. Additionally, Fireworks AI's platform supports integration with experiment tracking tools like Weights & Biases (W&B), enabling you to visualize and analyze your training metrics effectively. For detailed instructions on setting up and using these monitoring tools, refer to Fireworks AI's fine-tuning guide.",
+        "verdict": "failed"
+    }
+]

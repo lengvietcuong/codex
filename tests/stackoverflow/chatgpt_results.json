@@ -1,0 +1,63 @@
+[
+    {
+      "question": "Why does my Python script crash with a segmentation fault when using NumPy?",
+      "base_answer": "Segmentation faults may occur due to low-level issues when NumPy interfaces with C libraries or reinitializes the interpreter.",
+      "model_answer": "A segmentation fault occurs when a program attempts to access a restricted area of memory, leading to a crash. In Python, such faults are uncommon but can occur, especially when interfacing with external libraries like NumPy that involve lower-level operations.\n\n**Potential Causes:**\n- Reinitializing the Python Interpreter\n- Multithreading issues with NumPy\n- Conflicts with other libraries\n- Hardware or system-level issues\n\n**Troubleshooting Steps:**\n- Isolate the issue\n- Check for library conflicts\n- Update or reinstall libraries\n- Use debugging tools (e.g., gdb)",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my JavaScript function return undefined instead of a string?",
+      "base_answer": "Undefined returns usually result from missing return statements, ASI pitfalls, or mismanaged asynchronous code.",
+      "model_answer": "In JavaScript, when a function returns undefined instead of the expected string, it typically indicates one of the following issues:\n\n**Common Causes:**\n- Missing or improperly placed return statements\n- Automatic Semicolon Insertion (ASI) pitfalls\n- Asynchronous behavior not handled correctly\n\n**Examples and Solutions:**\n- Ensure the function explicitly returns the desired value.\n- Place returned values on the same line as the return keyword or wrap them in parentheses.\n- Manage asynchronous operations using callbacks, promises, or async/await.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my SQL query return duplicate rows when using JOIN?",
+      "base_answer": "Duplicates usually result from one-to-many or many-to-many relationships or incorrect join conditions.",
+      "model_answer": "When performing SQL JOIN operations, encountering duplicate rows in your query results is a common issue.\n\n**Primary Causes:**\n- One-to-Many Relationships\n- Many-to-Many Relationships\n- Missing or Incorrect Join Conditions\n\n**Prevention Strategies:**\n- Refine join conditions\n- Use aggregate functions with GROUP BY\n- Apply the DISTINCT keyword as a last resort\n- Analyze data relationships",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my C++ program exit with error code 139 on Linux?",
+      "base_answer": "Error code 139 indicates a segmentation fault, often due to invalid pointer operations or buffer overflows.",
+      "model_answer": "An exit code of 139 on Linux indicates that your program encountered a segmentation fault (SIGSEGV).\n\n**Common Causes:**\n- Dereferencing null or uninitialized pointers\n- Dereferencing dangling pointers\n- Buffer overflows and stack overflows\n\n**Troubleshooting Steps:**\n- Review your code for improper pointer usage\n- Use debugging tools like gdb\n- Employ memory analysis tools such as valgrind\n- Verify array and buffer bounds",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my React component re-render infinitely when setting state?",
+      "base_answer": "Infinite re-renders are typically caused by state updates during the render phase or in useEffect without proper dependencies.",
+      "model_answer": "An infinite re-rendering loop in a React component typically occurs when the component's state is updated during the rendering phase.\n\n**Common Causes:**\n- State updates in the component body\n- State updates in useEffect without an appropriate dependency array\n\n**Solutions:**\n- Avoid calling state setters directly in the render function\n- Use useEffect with a proper dependency array (or an empty array to run only once)",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Java ArrayList throw IndexOutOfBoundsException at index 0?",
+      "base_answer": "IndexOutOfBoundsException occurs when trying to access or add at an index that doesn't exist, often in an empty list.",
+      "model_answer": "An IndexOutOfBoundsException at index 0 in a Java ArrayList typically occurs when attempting to access or modify the first element of an empty list.\n\n**Common Scenarios:**\n- Accessing an element in an empty list\n- Adding an element at a specific index in an empty list\n\n**Prevention:**\n- Check list size before accessing\n- Use safe methods for adding elements",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Flask route return a 404 error when using a dynamic URL parameter?",
+      "base_answer": "A 404 error can occur due to route mismatches like trailing slashes, improper route order, or type conversion issues.",
+      "model_answer": "When your Flask route returns a 404 error while using a dynamic URL parameter, several factors might be causing the issue.\n\n**Possible Causes:**\n- Trailing slashes causing mismatches\n- Incorrect route order\n- Type converters in dynamic routes (e.g., <int:post_id>)\n- Incorrect URL parameter syntax\n\n**Resolution:**\n- Ensure route definitions match the accessed URL\n- Adjust route order and type converters as necessary",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my SwiftUI List display blank rows after adding items?",
+      "base_answer": "Blank rows in a SwiftUI List can result from missing unique identifiers or improper data source modifications.",
+      "model_answer": "Experiencing blank rows in a SwiftUI List after adding items can be attributed to several common causes.\n\n**Key Issues:**\n- Incorrect or missing identifiers (lack of conformance to Identifiable)\n- Improper modifications to the data source\n- Misuse of the .id() modifier\n\n**Solutions:**\n- Ensure each item has a unique identifier\n- Use @State or @ObservedObject to manage data\n- Avoid or correct the use of .id() if causing issues",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Django model save a null value despite setting blank=False?",
+      "base_answer": "The behavior arises from the distinction between the 'null' and 'blank' options in model field definitions.",
+      "model_answer": "In Django, the behavior where a model field saves a NULL value despite setting blank=False is due to the interplay between the `null` and `blank` options.\n\n**Key Points:**\n- `null` controls database storage (NULL vs. empty string)\n- `blank` controls form validation (required or optional)\n\n**Recommendation:**\n- Set both `null=False` and `blank=False` for fields that must have a value\n- Ensure proper form handling and admin configuration",
+      "verdict": "passed"
+    },
+    {
+      "question": "Help me fix Cloudflare Turnstile error 400020.",
+      "base_answer": "Invalid site or secret key.",
+      "model_answer": "The Cloudflare Turnstile error code 400020 is not officially documented, but it has been reported by users in the Cloudflare Community. Based on these discussions, this error may occur due to issues with the hostname settings in your Turnstile widget configuration. To resolve this error, please follow these steps: Verify Hostname Configuration: Log in to your Cloudflare Dashboard. Navigate to the Turnstile widget settings. Ensure that the hostname values listed match the domains where the widget is deployed. For instance, if your site operates on example.com, the hostname should be set to example.com. If you're testing locally, include localhost in the hostname settings. Avoid Using Placeholders: Refrain from using placeholders like current-hostname.test in the hostname settings. Instead, specify the exact domain names. Check for JavaScript Attributes: Ensure that the Turnstile script does not include defer or async attributes, as these can interfere with the widget's loading process. Consult Official Documentation: Review the Cloudflare Turnstile Client-side Errors documentation for additional insights and troubleshooting steps. If the issue persists after these steps, consider reaching out to Cloudflare Support or seeking assistance in the Cloudflare Community.",
+      "verdict": "failed"
+    }
+  ]
+  

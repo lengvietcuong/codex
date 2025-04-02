@@ -1,0 +1,64 @@
+[
+    {
+      "question": "Why does my Python script crash with a segmentation fault when using NumPy?",
+      "base_answer": "Invalid memory access in NumPy operations.",
+      "model_answer": "Segmentation faults in Python with NumPy can be caused by issues like accessing invalid memory, incorrect indexing, mismatched array shapes, or issues with external libraries or C extensions. You can debug this by checking your NumPy version, ensuring you're using compatible versions of Python and NumPy, and using memory profiling tools. Running the script with debugging tools like gdb, valgrind, or using Python's built-in pdb debugger can help locate the exact issue.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my JavaScript function return undefined instead of a string?",
+      "base_answer": "Missing return or async issues cause undefined.",
+      "model_answer": "When a JavaScript function returns undefined instead of a string, it’s often due to a missing return statement, an issue with asynchronous code (like a promise not resolving), or accessing variables that are not properly defined or initialized. Double-check your return statements, ensure you're handling async operations correctly (e.g., using await), and inspect your function for proper variable initialization.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my SQL query return duplicate rows when using JOIN?",
+      "base_answer": "Duplicates stem from one-to-many/many-to-many joins.",
+      "model_answer": "Duplicate rows can occur in SQL JOINs when there is a one-to-many or many-to-many relationship between the tables. For example, if you are joining two tables and one of the tables has multiple rows matching a single row from the other table, the result will contain duplicates. To avoid this, you can use DISTINCT to filter out duplicates or refine your join conditions to ensure you’re joining the tables in a way that doesn’t cause excessive repetition. Another approach is to use GROUP BY or subqueries to aggregate the data as needed.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my C++ program exit with error code 139 on Linux?",
+      "base_answer": "Error 139 indicates a segmentation fault (SIGSEGV).",
+      "model_answer": "Error code 139 in C++ typically means the program has encountered a segmentation fault (SIGSEGV), which occurs when the program tries to access a memory location that it's not allowed to. This can be due to issues like dereferencing a null or invalid pointer, accessing memory that has been freed, or buffer overflows. To diagnose this, use debugging tools like gdb or valgrind to track memory allocation and pinpoint the exact location of the fault.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my React component re-render infinitely when setting state?",
+      "base_answer": "Unconditional state updates cause infinite loops.",
+      "model_answer": "Infinite re-renders in React are often caused by an unconditional state update inside the component’s render method or in useEffect with improper dependency arrays. This creates a loop where the component keeps re-rendering every time state changes. To fix this, ensure that state updates only occur under specific conditions (e.g., within event handlers or after a state check) and properly specify dependencies in the useEffect hook to prevent unnecessary rerenders.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Java ArrayList throw IndexOutOfBoundsException at index 0?",
+      "base_answer": "Accessing an empty list or using wrong loop bounds.",
+      "model_answer": "An IndexOutOfBoundsException at index 0 in a Java ArrayList typically occurs when you try to access an element from an empty list or if your loop bounds are incorrect (e.g., iterating from 0 to list.size() instead of 0 to list.size() - 1). Double-check your list initialization and ensure you're not attempting to access an index that doesn't exist in the list, especially if the list is empty or hasn’t been populated correctly.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Flask route return a 404 error when using a dynamic URL parameter?",
+      "base_answer": "Parameter mismatches or missing routes cause 404 errors.",
+      "model_answer": "A 404 error in Flask when using a dynamic URL parameter can occur if the parameter in the URL doesn’t match the one in the route definition, or if the route itself is not correctly defined. For example, if you define the route as '/user/<username>' but the URL you are visiting doesn’t match this pattern, Flask will return a 404 error. Ensure the parameter names and URL patterns match exactly, and check for any other conflicting routes or method restrictions (GET vs POST).",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my SwiftUI List display blank rows after adding items?",
+      "base_answer": "Nesting issues or ID conflicts can cause blank rows.",
+      "model_answer": "Blank rows in a SwiftUI List can occur if you’re using a ScrollView inside the List or if there are ID conflicts in the data being displayed. SwiftUI requires stable and unique IDs for list items, and having duplicate or invalid IDs can cause issues with rendering. Make sure that you’re using a proper data model with unique IDs, and remove any unnecessary wrappers like ScrollViews around the List. You can also use .id() to ensure each item has a unique identity.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Why does my Django model save a null value despite setting blank=False?",
+      "base_answer": "Field settings and validation differences cause this issue.",
+      "model_answer": "In Django models, blank=False prevents a field from being left empty in forms, while null=False prevents storing a NULL value in the database. However, if you set blank=False but allow null=True in your model, Django may still save a NULL value for the field if the form is not properly validated. Ensure that both null=False and blank=False are set correctly for the field, and check that the model is validated before saving to the database, either through a form or programmatic validation.",
+      "verdict": "passed"
+    },
+    {
+      "question": "Help me fix Cloudflare Turnstile error 400020.",
+      "base_answer": "Invalid site or secret key.",
+      "model_answer": "Fixing Cloudflare Turnstile Error 400020: The error code 400020 in Cloudflare Turnstile typically indicates an issue with the secret key validation. This is a common error when implementing Turnstile on your website. Common causes for Error 400020: 1. Incorrect Secret Key: You might be using an invalid or incorrect secret key when verifying the token on your server. 2. Mismatched Keys: The secret key you're using doesn't match the site key that was used to generate the token. 3. Environment Mismatch: Using a production secret key to validate a token generated with a testing site key (or vice versa). 4. Key Format Issues: The secret key might have extra spaces, line breaks, or other formatting issues. How to fix it: 1. Double-check your secret key: Ensure you're using the correct secret key from your Cloudflare dashboard. Copy it directly without any modifications. 2. Verify key pairs: Make sure the site key used in your frontend matches the corresponding secret key used in your backend. 3. Check environment: Confirm you're using the correct key pair for your environment (test or production). 4. Inspect your implementation: Review your server-side code that validates the token. The validation request should be properly formatted. Here's a basic example of how the server-side validation should look in Python: import requests def verify_turnstile_token(token, secret_key): response = requests.post('https://challenges.cloudflare.com/turnstile/v0/siteverify', data={'secret': secret_key, 'response': token}) result = response.json() return result['success'] If you continue experiencing issues after checking these common causes, you might want to enable more detailed error logging in your application to get additional information about what's happening during the validation process."
+,
+      "verdict": "passed"
+    }
+  ]
+  
